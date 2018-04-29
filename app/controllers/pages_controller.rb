@@ -26,16 +26,10 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
 
-    # @url = params[:original_url] #### I think this is where the problem is. How do I pass the "original_url" input into the controller? ####
-    @url = "http://en.wikipedia.org/"
-    data = Nokogiri::HTML(open(@url))
-    puts data.class
-    
-    # headline = data.at_css(".entry-title").text.strip
-    # @article = Article.new(:headline => headline)
-
     respond_to do |format|
       if @page.save
+
+        GetH1Job.perform_later(@page)
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
         format.json { render :show, status: :created, location: @page }
       else
