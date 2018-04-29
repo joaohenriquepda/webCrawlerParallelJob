@@ -23,7 +23,26 @@ default: &default
 
 development:
   <<: *default
-  database: app_development
+  database: webCrawler_development
+  username: postgres
+  # password: <%= ENV['ENGEFISA_AUTH_DATABASE_PASSWORD'] %>
+  password: webCrawler_password
+  host: db
+
+test:
+  <<: *default
+  database: webCrawler_test
+  username: postgres
+  # password: <%= ENV['ENGEFISA_AUTH_DATABASE_PASSWORD'] %>
+  password: webCrawler_password
+  host: db
+
+production:
+  <<: *default
+  database: webCrawler_production
+  username: engefisa_auth
+  password: <%= ENV['ENGEFISA_AUTH_DATABASE_PASSWORD'] %>
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
