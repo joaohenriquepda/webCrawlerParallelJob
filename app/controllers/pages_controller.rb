@@ -30,6 +30,8 @@ class PagesController < ApplicationController
       if @page.save
 
         GetH1Job.perform_later(@page)
+        GetH2Job.perform_later(@page)
+        GetH3Job.perform_later(@page)
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
         format.json { render :show, status: :created, location: @page }
       else

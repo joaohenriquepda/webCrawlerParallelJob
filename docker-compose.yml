@@ -13,11 +13,20 @@ services:
     image: redis:latest  
   api:
     build: ./
-    command: rails s 
+    command: rails s  
     volumes:
       - .:/app
     ports:
       - 3000:3000
     depends_on:
       - redis
+  sidekiq:
+    depends_on:
+      - db
+      - redis
+    build: .
+    command: bundle exec sidekiq -q default -c 1
+    volumes:
+      - '.:/app'
+
 
