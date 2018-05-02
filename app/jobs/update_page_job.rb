@@ -13,7 +13,8 @@ class UpdatePageJob < ApplicationJob
       @page.h2.push(args[1])
     when "h3"
       @page.h3.push(args[1])
-    else
+    when 'links'
+      @page.links.push(args[1])  
     end
 
     @page.save

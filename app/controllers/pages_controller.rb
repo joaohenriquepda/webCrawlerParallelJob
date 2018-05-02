@@ -24,7 +24,6 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    flash[:notice] = "Mail delivered"  
     @page = Page.new(page_params)
 
     respond_to do |format|
@@ -33,8 +32,8 @@ class PagesController < ApplicationController
         GetH1Job.perform_later(@page)
         GetH2Job.perform_later(@page)
         GetH3Job.perform_later(@page)
+        GetLinksJob.perform_later(@page)
 
-        
         sleep 2
 
         format.html { redirect_to @page, notice: 'Page was successfully created.' }

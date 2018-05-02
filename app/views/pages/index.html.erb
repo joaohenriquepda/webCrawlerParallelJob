@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+  <% if flash[:notice] %>
+    <div class="alert alert-primary" role="alert">
+      A simple primary alert—check it out!
+      <%= flash[:notice] %>
+    </div> 
+  <% end %>
+
 
 <h1>Pages</h1>
 
